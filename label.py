@@ -20,6 +20,7 @@ class Label(object):
     ERROR_STRESS_BC = "Error stress BC"
     MAG_DEF_GRADIENT_AIM = "Deformation gradient aim magnitude"
     MAG_PIOLA_KIRCHHOFF_STRESS = "Piola-Kirchhoff stress magnitude [MPa]"
+    VONMISES_STRESS = "Von Mises stress [MPa]"
 
 class _Label(Label):
     TUPLE_ERROR_DIVERGENCE = "error divergence"
