@@ -1,7 +1,7 @@
 # Copyright (c) 2019 Lukas Koschmieder
 # Copyright (c) 2015 Mingxuan Lin
 
-from .label import _Label as Label
+from .label import _Label as L
 import numpy as np
 
 def Piola2Cauchy(P, F):
@@ -34,22 +34,21 @@ def mag(label, new):
     return np.sqrt(a.dot(a))
 
 def filter(new, cache):
-    cache[Label.STEP].append(len(cache[Label.STEP]))
-    cache[Label.ITER].append(new[Label.ITER])
-    for label in [Label.INC, Label.MAX_INC,
-                  Label.SUBINC, Label.MAX_SUBINC,
-                  Label.LOADCASE, Label.MAX_LOADCASE,
-                  Label.LC_INC, Label.LC_MAX_INC,
-                  Label.TIME,]:
+    cache[L.STEP].append(len(cache[L.STEP]))
+    for label in [L.ITER, L.MIN_ITER, L.MAX_ITER,]:
+        cache[label].append(new[label])
+    for label in [L.INC, L.MAX_INC, L.SUBINC, L.MAX_SUBINC,
+                  L.LOADCASE, L.MAX_LOADCASE, L.LC_INC, L.LC_MAX_INC,
+                  L.LC_SUBINC, L.LC_MAX_SUBINC, L.TIME,]:
         cache[label].append(fallback(label, new, cache))
-    cache[Label.ERROR_DIVERGENCE].append(
-        new[Label.TUPLE_ERROR_DIVERGENCE][0][0])
-    cache[Label.ERROR_STRESS_BC].append(
-        new[Label.TUPLE_ERROR_STRESS_BC][0][0])
+    cache[L.ERROR_DIVERGENCE].append(
+        new[L.TUPLE_ERROR_DIVERGENCE][0][0])
+    cache[L.ERROR_STRESS_BC].append(
+        new[L.TUPLE_ERROR_STRESS_BC][0][0])
 
-    P = Label.TUPLE_PIOLA_KIRCHHOFF_STRESS
-    F = Label.TUPLE_DEF_GRADIENT_AIM
-    cache[Label.MAG_PIOLA_KIRCHHOFF_STRESS].append(mag(P, new))
-    cache[Label.MAG_DEF_GRADIENT_AIM].append(mag(F, new))
-    cache[Label.VONMISES_STRESS].append(
+    P = L.TUPLE_PIOLA_KIRCHHOFF_STRESS
+    F = L.TUPLE_DEF_GRADIENT_AIM
+    cache[L.MAG_PIOLA_KIRCHHOFF_STRESS].append(mag(P, new))
+    cache[L.MAG_DEF_GRADIENT_AIM].append(mag(F, new))
+    cache[L.VONMISES_STRESS].append(
         Cauchy2Mises(Piola2Cauchy(new[P],new[F])))
