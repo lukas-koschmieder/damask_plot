@@ -52,7 +52,7 @@ class Parser(NodeVisitor):
 
     def visit_inc_end(self, node, visited_children):
         self._data[L.INC] = int(node.children[2].text)
-        self._data[L.CONVERGED] = True
+        self._data[L.CONVERGENCE] = True
 
     def visit_any(self, node, visited_children):
         if node.text.strip():

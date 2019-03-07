@@ -39,7 +39,8 @@ def filter(new, cache):
         cache[label].append(new[label])
     for label in [L.INC, L.MAX_INC, L.SUBINC, L.MAX_SUBINC,
                   L.LOADCASE, L.MAX_LOADCASE, L.LC_INC, L.LC_MAX_INC,
-                  L.LC_SUBINC, L.LC_MAX_SUBINC, L.TIME,]:
+                  L.LC_SUBINC, L.LC_MAX_SUBINC,
+                  L.TIME,]:
         cache[label].append(fallback(label, new, cache))
     cache[L.ERROR_DIVERGENCE].append(
         new[L.TUPLE_ERROR_DIVERGENCE][0][0])
@@ -52,3 +53,5 @@ def filter(new, cache):
     cache[L.MAG_DEF_GRADIENT_AIM].append(mag(F, new))
     cache[L.VONMISES_STRESS].append(
         Cauchy2Mises(Piola2Cauchy(new[P],new[F])))
+
+    cache[L.CONVERGENCE].append(L.CONVERGENCE in new)

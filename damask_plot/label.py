@@ -21,12 +21,12 @@ class Label(object):
     MAG_DEF_GRADIENT_AIM = "Deformation gradient aim magnitude"
     MAG_PIOLA_KIRCHHOFF_STRESS = "Piola-Kirchhoff stress magnitude [MPa]"
     VONMISES_STRESS = "Von Mises stress [MPa]"
+    CONVERGENCE = "Convergence"
 
 class _Label(Label):
     TUPLE_ERROR_DIVERGENCE = "error divergence"
     TUPLE_ERROR_STRESS_BC = "error stress BC"
     TUPLE_DEF_GRADIENT_AIM = "deformation gradient aim"
     TUPLE_PIOLA_KIRCHHOFF_STRESS = "Piola--Kirchhoff stress       / MPa"
-    CONVERGED = "converged"
 
 labels = [getattr(Label, a) for a in dir(Label) if not a.startswith("_")]
