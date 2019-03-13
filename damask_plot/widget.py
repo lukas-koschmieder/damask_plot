@@ -4,6 +4,7 @@ from ipywidgets import Box
 from aixplot.widget import Filter, NoneFilter
 from aixplot.widget import Widget as Aixplot
 import numpy as np
+from .cacher import IterationCacher
 from .label import Label as L
 
 class ConvergenceFilter(Filter):
@@ -15,6 +16,8 @@ class ConvergenceFilter(Filter):
         return a[f]
 
 class Widget(Aixplot):
-    def __init__(self, cacher, logger=None, **traits):
+    def __init__(self, cacher_class=IterationCacher, logger=None, **traits):
         self.filters = [NoneFilter(), ConvergenceFilter()]
-        super(Widget, self).__init__(cacher, logger=logger, **traits)
+        self.filter = self.filters[1]
+        self.x, self.y = L.STEP, L.VONMISES_STRESS
+        super(Widget, self).__init__(cacher_class, logger=logger, **traits)
