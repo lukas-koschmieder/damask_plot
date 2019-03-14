@@ -3,6 +3,8 @@
 damask_plot is a Düsseldorf Advanced Material Simulation Kit (DAMASK)
 "live plotter" for Jupyter
 
+![](damask_plot.gif)
+
 ## Install
 
 ### With ``pip``
