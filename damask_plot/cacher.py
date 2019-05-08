@@ -3,7 +3,6 @@
 import asyncio
 from aixplot.cacher import Cacher
 from .filter import filter
-from .label import labels
 from .reader import IncrementReader, IterationReader
 
 class DamaskCacher(Cacher):
