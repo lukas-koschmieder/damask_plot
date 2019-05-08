@@ -28,5 +28,3 @@ class _Label(Label):
     TUPLE_ERROR_STRESS_BC = "error stress BC"
     TUPLE_DEF_GRADIENT_AIM = "deformation gradient aim"
     TUPLE_PIOLA_KIRCHHOFF_STRESS = "Piola--Kirchhoff stress       / MPa"
-
-labels = [getattr(Label, a) for a in dir(Label) if not a.startswith("_")]

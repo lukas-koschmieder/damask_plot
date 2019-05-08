@@ -13,9 +13,6 @@ class DamaskCacher(Cacher):
     def _filter(self, data, cache):
         return filter(data, cache)
 
-    def labels(self):
-        return labels
-
     async def _async_read(self, file):
         data = await self._reader.async_read(file, tries=1)
         return data
